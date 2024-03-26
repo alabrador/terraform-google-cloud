@@ -1,4 +1,5 @@
 resource "google_compute_network" "vpc_network" {
+  project                 = "gmxamerica"
   name                    = "network-gmxamerica"
   auto_create_subnetworks = false
   mtu                     = 1460
