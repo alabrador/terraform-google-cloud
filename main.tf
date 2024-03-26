@@ -1,12 +1,12 @@
 resource "google_compute_network" "vpc_network" {
-  project                 = "gmxamerica"
+  project                 = "Dos Carnes"
   name                    = "network-gmxamerica"
   auto_create_subnetworks = false
   mtu                     = 1460
 }
 
 resource "google_compute_subnetwork" "default" {
-  project       = "gmxamerica"
+  project       = "Dos Carnes"
   name          = "gmxamerica-subnet"
   ip_cidr_range = "10.0.1.0/24"
   region        = "us-west1"
@@ -15,7 +15,7 @@ resource "google_compute_subnetwork" "default" {
 
 #Create a single Compute Engine instance
 resource "google_compute_instance" "default" {
-  project      = "gmxamerica"
+  project      = "Dos Carnes"
   name         = "lupin3"
   machine_type = "f1-micro"
   zone         = "us-west1-a"
@@ -39,7 +39,7 @@ resource "google_compute_instance" "default" {
   }
 }
 resource "google_compute_firewall" "ssh" {
-  project = "gmxamerica"
+  project = "Dos Carnes"
   name = "allow-ssh"
   allow {
     ports    = ["22"]
@@ -53,7 +53,7 @@ resource "google_compute_firewall" "ssh" {
 }
 
 resource "google_compute_firewall" "apache" {
-  project = "gmxamerica"
+  project = "Dos Carnes"
   name    = "apache-app-firewall"
   network = google_compute_network.vpc_network.id
 
