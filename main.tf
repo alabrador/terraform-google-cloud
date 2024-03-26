@@ -6,6 +6,7 @@ resource "google_compute_network" "vpc_network" {
 }
 
 resource "google_compute_subnetwork" "default" {
+  project       = "gmxamerica"
   name          = "gmxamerica-subnet"
   ip_cidr_range = "10.0.1.0/24"
   region        = "us-west1"
@@ -37,6 +38,7 @@ resource "google_compute_instance" "default" {
   }
 }
 resource "google_compute_firewall" "ssh" {
+  project = "gmxamerica"
   name = "allow-ssh"
   allow {
     ports    = ["22"]
@@ -50,6 +52,7 @@ resource "google_compute_firewall" "ssh" {
 }
 
 resource "google_compute_firewall" "apache" {
+  project = "gmxamerica"
   name    = "apache-app-firewall"
   network = google_compute_network.vpc_network.id
 
