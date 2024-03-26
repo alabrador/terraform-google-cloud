@@ -15,11 +15,7 @@ resource "google_compute_instance" "default" {
   metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq apache2 php; systemctl start apache2"
 
   network_interface {
-    subnetwork = google_compute_subnetwork.default.id
-
-    access_config {
-      # Include this section to give the VM an external IP address
-    }
+    subnetwork = google_compute_subnetwork.default
   }
 }
 
