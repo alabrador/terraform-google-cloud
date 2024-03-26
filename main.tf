@@ -15,6 +15,7 @@ resource "google_compute_subnetwork" "default" {
 
 #Create a single Compute Engine instance
 resource "google_compute_instance" "default" {
+  project      = "gmxamerica"
   name         = "lupin3"
   machine_type = "f1-micro"
   zone         = "us-west1-a"
