@@ -16,10 +16,10 @@ resource "google_compute_subnetwork" "default" {
 #Create a single Compute Engine instance
 resource "google_compute_instance" "default" {
   project      = "banded-elevator-418317"
-  name         = "lupin3"
+  name         = "jenkins"
   machine_type = "f1-micro"
   zone         = "us-west1-a"
-  tags         = ["webserver"]
+  tags         = ["terraform", "jenkins"]
 
   boot_disk {
     initialize_params {
@@ -28,7 +28,7 @@ resource "google_compute_instance" "default" {
   }
 
   # Install Apache
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -y apache2 php google-osconfig-agent"
+  metadata_startup_script = "sudo apt-get update; sudo apt-get install -y certbot nginx google-osconfig-agent"
 
   network_interface {
     subnetwork = google_compute_subnetwork.default.id
@@ -52,9 +52,9 @@ resource "google_compute_firewall" "ssh" {
   target_tags   = ["ssh"]
 }
 
-resource "google_compute_firewall" "apache" {
+resource "google_compute_firewall" "nginx" {
   project = "banded-elevator-418317"
-  name    = "apache-app-firewall"
+  name    = "nginx-app-firewall"
   network = google_compute_network.vpc_network.id
 
   allow {
@@ -62,9 +62,4 @@ resource "google_compute_firewall" "apache" {
     ports    = ["80"]
   }
   source_ranges = ["0.0.0.0/0"]
-}
-
-// A variable for extracting the external IP address of the VM
-output "Web-server-URL" {
- value = join("",["http://",google_compute_instance.default.network_interface.0.access_config.0.nat_ip,":80"])
 }
