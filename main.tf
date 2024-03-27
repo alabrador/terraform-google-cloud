@@ -28,7 +28,7 @@ resource "google_compute_instance" "default" {
   }
 
   # Install Apache
-  metadata_startup_script = "sudo apt-get update; sudo apt-get install -yq apache2 php google-osconfig-agent"
+  metadata_startup_script = "sudo apt-get update; sudo apt-get install -y apache2 php google-osconfig-agent"
 
   network_interface {
     subnetwork = google_compute_subnetwork.default.id
