@@ -1,13 +1,13 @@
 resource "google_compute_network" "vpc_network" {
   project                 = "banded-elevator-418317"
-  name                    = "network-gmxamerica"
+  name                    = "network-prueba"
   auto_create_subnetworks = false
   mtu                     = 1460
 }
 
 resource "google_compute_subnetwork" "default" {
   project       = "banded-elevator-418317"
-  name          = "gmxamerica-subnet"
+  name          = "prueba-subnet"
   ip_cidr_range = "10.0.1.0/24"
   region        = "us-west1"
   network       = google_compute_network.vpc_network.id
@@ -16,7 +16,7 @@ resource "google_compute_subnetwork" "default" {
 #Create a single Compute Engine instance
 resource "google_compute_instance" "default" {
   project      = "banded-elevator-418317"
-  name         = "jenkins"
+  name         = "prueba-terraform"
   machine_type = "f1-micro"
   zone         = "us-west1-a"
   tags         = ["terraform", "jenkins"]
