@@ -19,7 +19,7 @@ resource "google_compute_instance" "default" {
   name         = "prueba-terraform"
   machine_type = "f1-micro"
   zone         = "us-west1-a"
-  tags         = ["terraform", "jenkins"]
+  tags         = ["terraform", "jenkins", "cloud"]
 
   boot_disk {
     initialize_params {
